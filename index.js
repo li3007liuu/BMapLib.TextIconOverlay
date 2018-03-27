@@ -1,15 +1,15 @@
-(function (root, factory) {  
-    if (typeof exports === 'object') {  
+(function (root, factory) {
+    if (typeof exports === 'object') {
         module.exports = factory();
-    } else if (typeof define === 'function' && define.amd) {  
-        define(factory);  
+    } else if (typeof define === 'function' && define.amd) {
+        define(factory);
     } else {
         root.BMapLib = root.BMapLib || {};
-        root.BMapLib.TextIconOverlay = root.BMapLib.TextIconOverlay || factory();  
-    }  
+        root.BMapLib.TextIconOverlay = root.BMapLib.TextIconOverlay || factory();
+    }
 })(this, function() {
     var T,
-    baidu = T = baidu || {version: "1.3.8"}; 
+        baidu = T = baidu || {version: "1.3.8"};
     var context = {}
     //提出guid，防止在与老版本Tangram混用时
     //在下一行错误的修改context[undefined]
@@ -19,13 +19,13 @@
     //一些页面级别唯一的属性，需要挂载在context[baidu.guid]上
     context[baidu.guid] = context[baidu.guid] || {};
 
-    /**         
-    * @ignore
-    * @namespace baidu.dom 操作dom的方法。
-    */
+    /**
+     * @ignore
+     * @namespace baidu.dom 操作dom的方法。
+     */
     baidu.dom = baidu.dom || {};
 
-    
+
     /**
      * 从文档中获取指定的DOM元素
      * @name baidu.dom.g
@@ -35,7 +35,7 @@
      * @shortcut g,T.G
      * @meta standard
      * @see baidu.dom.q
-     *             
+     *
      * @returns {HTMLElement|null} 获取的元素，查找不到时返回null,如果参数不合法，直接返回参数
      */
     baidu.dom.g = function (id) {
@@ -58,7 +58,7 @@
      * @param {HTMLElement|string} element 目标元素或目标元素的id
      * @meta standard
      * @see baidu.dom.getWindow
-     *             
+     *
      * @returns {HTMLDocument} 目标元素所属的document对象
      */
     baidu.dom.getDocument = function (element) {
@@ -67,9 +67,9 @@
     };
 
     /**
-         * @ignore
+     * @ignore
      * @namespace baidu.lang 对语言层面的封装，包括类型判断、模块扩展、继承基类以及对象自定义事件的支持。
-    */
+     */
     baidu.lang = baidu.lang || {};
 
     /**
@@ -81,7 +81,7 @@
      * @shortcut isString
      * @meta standard
      * @see baidu.lang.isObject,baidu.lang.isNumber,baidu.lang.isArray,baidu.lang.isElement,baidu.lang.isBoolean,baidu.lang.isDate
-     *             
+     *
      * @returns {boolean} 类型判断结果
      */
     baidu.lang.isString = function (source) {
@@ -94,7 +94,7 @@
     /**
      * 从文档中获取指定的DOM元素
      * **内部方法**
-     * 
+     *
      * @param {string|HTMLElement} id 元素的id或DOM元素
      * @meta standard
      * @return {HTMLElement} DOM元素，如果不存在，返回null，如果参数不合法，直接返回参数
@@ -124,7 +124,7 @@
          * @grammar baidu.browser.ie
          * @meta standard
          * @shortcut ie
-         * @see baidu.browser.firefox,baidu.browser.safari,baidu.browser.opera,baidu.browser.chrome,baidu.browser.maxthon 
+         * @see baidu.browser.firefox,baidu.browser.safari,baidu.browser.opera,baidu.browser.chrome,baidu.browser.maxthon
          */
         baidu.browser.ie = baidu.ie = document.documentMode || + RegExp['\x241'];
     }
@@ -140,7 +140,7 @@
      * @param {string} key 要获取的样式名
      *
      * @see baidu.dom.getStyle
-     *             
+     *
      * @returns {string} 目标元素的computed style值
      */
 
@@ -154,7 +154,7 @@
                 return styles[key] || styles.getPropertyValue(key);
             }
         }
-        return ''; 
+        return '';
     };
 
     /**
@@ -182,7 +182,7 @@
     };
 
     /**
-         * @ignore
+     * @ignore
      * @namespace baidu.string 操作字符串的方法。
      */
     baidu.string = baidu.string || {};
@@ -196,7 +196,7 @@
      * @remark
      * 支持单词以“-_”分隔
      * @meta standard
-     *             
+     *
      * @returns {string} 驼峰化处理后的字符串
      */
     baidu.string.toCamelCase = function (source) {
@@ -217,14 +217,14 @@
      * @param {HTMLElement|string} element 目标元素或目标元素的id
      * @param {string} key 要获取的样式名
      * @remark
-     * 
+     *
      * 为了精简代码，本模块默认不对任何浏览器返回值进行归一化处理（如使用getStyle时，不同浏览器下可能返回rgb颜色或hex颜色），也不会修复浏览器的bug和差异性（如设置IE的float属性叫styleFloat，firefox则是cssFloat）。<br />
      * baidu.dom._styleFixer和baidu.dom._styleFilter可以为本模块提供支持。<br />
-     * 其中_styleFilter能对颜色和px进行归一化处理，_styleFixer能对display，float，opacity，textOverflow的浏览器兼容性bug进行处理。	
+     * 其中_styleFilter能对颜色和px进行归一化处理，_styleFixer能对display，float，opacity，textOverflow的浏览器兼容性bug进行处理。
      * @shortcut getStyle
      * @meta standard
      * @see baidu.dom.setStyle,baidu.dom.setStyles, baidu.dom.getComputedStyle
-     *             
+     *
      * @returns {string} 目标元素的样式值
      */
     baidu.dom.getStyle = function (element, key) {
@@ -234,8 +234,8 @@
         key = baidu.string.toCamelCase(key);
         //computed style, then cascaded style, then explicitly set style.
         var value = element.style[key] ||
-                    (element.currentStyle ? element.currentStyle[key] : "") || 
-                    dom.getComputedStyle(element, key);
+            (element.currentStyle ? element.currentStyle[key] : "") ||
+            dom.getComputedStyle(element, key);
 
         // 在取不到值的时候，用fixer进行修正
         if (!value) {
@@ -258,19 +258,19 @@
 
 
     if (/opera\/(\d+\.\d)/i.test(navigator.userAgent)) {
-    /**
-     * 判断是否为opera浏览器
-     * @property opera opera版本号
-     * @grammar baidu.browser.opera
-     * @meta standard
-     * @see baidu.browser.ie,baidu.browser.firefox,baidu.browser.safari,baidu.browser.chrome 
-     */
+        /**
+         * 判断是否为opera浏览器
+         * @property opera opera版本号
+         * @grammar baidu.browser.opera
+         * @meta standard
+         * @see baidu.browser.ie,baidu.browser.firefox,baidu.browser.safari,baidu.browser.chrome
+         */
         baidu.browser.opera = + RegExp['\x241'];
     }
 
     /**
      * 判断是否为webkit内核
-     * @property isWebkit 
+     * @property isWebkit
      * @grammar baidu.browser.isWebkit
      * @meta standard
      * @see baidu.browser.isGecko
@@ -279,7 +279,7 @@
 
     /**
      * 判断是否为gecko内核
-     * @property isGecko 
+     * @property isGecko
      * @grammar baidu.browser.isGecko
      * @meta standard
      * @see baidu.browser.isWebkit
@@ -288,7 +288,7 @@
 
     /**
      * 判断是否严格标准的渲染模式
-     * @property isStrict 
+     * @property isStrict
      * @grammar baidu.browser.isStrict
      * @meta standard
      */
@@ -301,22 +301,22 @@
      * @grammar baidu.dom.getPosition(element)
      * @param {HTMLElement|string} element 目标元素或目标元素的id
      * @meta standard
-     *             
+     *
      * @returns {Object} 目标元素的位置，键值为top和left的Object。
      */
     baidu.dom.getPosition = function (element) {
         element = baidu.dom.g(element);
-        var doc = baidu.dom.getDocument(element), 
+        var doc = baidu.dom.getDocument(element),
             browser = baidu.browser,
             getStyle = baidu.dom.getStyle,
-        // Gecko 1.9版本以下用getBoxObjectFor计算位置
-        // 但是某些情况下是有bug的
-        // 对于这些有bug的情况
-        // 使用递归查找的方式
-            BUGGY_GECKO_BOX_OBJECT = browser.isGecko > 0 && 
-                                        doc.getBoxObjectFor &&
-                                        getStyle(element, 'position') == 'absolute' &&
-                                        (element.style.top === '' || element.style.left === ''),
+            // Gecko 1.9版本以下用getBoxObjectFor计算位置
+            // 但是某些情况下是有bug的
+            // 对于这些有bug的情况
+            // 使用递归查找的方式
+            BUGGY_GECKO_BOX_OBJECT = browser.isGecko > 0 &&
+                doc.getBoxObjectFor &&
+                getStyle(element, 'position') == 'absolute' &&
+                (element.style.top === '' || element.style.left === ''),
             pos = {"left":0,"top":0},
             viewport = (browser.ie && !browser.isStrict) ? doc.body : doc.documentElement,
             parent,
@@ -327,14 +327,14 @@
         }
 
         if(element.getBoundingClientRect){ // IE and Gecko 1.9+
-    
+
             //当HTML或者BODY有border width时, 原生的getBoundingClientRect返回值是不符合预期的
             //考虑到通常情况下 HTML和BODY的border只会设成0px,所以忽略该问题.
             box = element.getBoundingClientRect();
 
             pos.left = Math.floor(box.left) + Math.max(doc.documentElement.scrollLeft, doc.body.scrollLeft);
             pos.top  = Math.floor(box.top)  + Math.max(doc.documentElement.scrollTop,  doc.body.scrollTop);
-    
+
             // IE会给HTML元素添加一个border，默认是medium（2px）
             // 但是在IE 6 7 的怪异模式下，可以被html { border: 0; } 这条css规则覆盖
             // 在IE7的标准模式下，border永远是2px，这个值通过clientLeft 和 clientTop取得
@@ -342,7 +342,7 @@
             // clientTop和clientLeft不会更新
             pos.left -= doc.documentElement.clientLeft;
             pos.top  -= doc.documentElement.clientTop;
-    
+
             var htmlDom = doc.body,
                 // 在这里，不使用element.style.borderLeftWidth，只有computedStyle是可信的
                 htmlBorderLeftWidth = parseInt(getStyle(htmlDom, 'borderLeftWidth')),
@@ -351,21 +351,21 @@
                 pos.left -= isNaN(htmlBorderLeftWidth) ? 2 : htmlBorderLeftWidth;
                 pos.top  -= isNaN(htmlBorderTopWidth) ? 2 : htmlBorderTopWidth;
             }
-        } else { 
+        } else {
             // safari/opera/firefox
             parent = element;
 
             do {
                 pos.left += parent.offsetLeft;
                 pos.top  += parent.offsetTop;
-    
+
                 // safari里面，如果遍历到了一个fixed的元素，后面的offset都不准了
                 if (browser.isWebkit > 0 && getStyle(parent, 'position') == 'fixed') {
                     pos.left += doc.body.scrollLeft;
                     pos.top  += doc.body.scrollTop;
                     break;
                 }
-        
+
                 parent = parent.offsetParent;
             } while (parent && parent != element);
 
@@ -415,16 +415,16 @@
      * @param {string} type 事件类型
      * @param {Function} listener 需要添加的监听器
      * @remark
-     * 
-    1. 不支持跨浏览器的鼠标滚轮事件监听器添加<br>
-    2. 改方法不为监听器灌入事件对象，以防止跨iframe事件挂载的事件对象获取失败
+     *
+     1. 不支持跨浏览器的鼠标滚轮事件监听器添加<br>
+     2. 改方法不为监听器灌入事件对象，以防止跨iframe事件挂载的事件对象获取失败
 
-        * @shortcut on
-        * @meta standard
-        * @see baidu.event.un
-        *             
-        * @returns {HTMLElement|window} 目标元素
-        */
+     * @shortcut on
+     * @meta standard
+     * @see baidu.event.un
+     *
+     * @returns {HTMLElement|window} 目标元素
+     */
     baidu.event.on = function (element, type, listener) {
         type = type.replace(/^on/i, '');
         element = baidu.dom._g(element);
@@ -468,7 +468,7 @@
      * @grammar baidu.lang.guid()
      * @version 1.1.1
      * @meta standard
-     *             
+     *
      * @returns {String} 当前页面的唯一标识字符串
      */
 
@@ -508,7 +508,7 @@
     };
 
     /**
-     *    
+     *
      * @ignore
      * @class  Tangram继承机制提供的一个基类，用户可以通过继承baidu.lang.Class来获取它的属性及方法。
      * @name 	baidu.lang.Class
@@ -574,7 +574,7 @@
      * @param 	{string}   type         自定义事件的名称
      * @param 	{Function} handler      自定义事件被触发时应该调用的回调函数
      * @param 	{string}   [key]		为事件监听函数指定的名称，可在移除时使用。如果不提供，方法会默认为它生成一个全局唯一的key。
-     * @remark 	事件类型区分大小写。如果自定义事件名称不是以小写"on"开头，该方法会给它加上"on"再进行判断，即"click"和"onclick"会被认为是同一种事件。 
+     * @remark 	事件类型区分大小写。如果自定义事件名称不是以小写"on"开头，该方法会给它加上"on"再进行判断，即"click"和"onclick"会被认为是同一种事件。
      */
     baidu.lang.Class.prototype.addEventListener = function (type, handler, key) {
         if (!baidu.lang.isFunction(handler)) {
@@ -588,7 +588,7 @@
             if (/[^\w\-]/.test(key)) {
                 throw("nonstandard key:" + key);
             } else {
-                handler.hashCode = key; 
+                handler.hashCode = key;
                 id = key;
             }
         }
@@ -639,9 +639,9 @@
      * @param {baidu.lang.Event|String} event 	Event对象，或事件名称(1.1.1起支持)
      * @param {Object} 					options 扩展参数,所含属性键值会扩展到Event对象上(1.2起支持)
      * @remark 处理会调用通过addEventListenr绑定的自定义事件回调函数之外，还会调用直接绑定到对象上面的自定义事件。例如：<br>
-    myobj.onMyEvent = function(){}<br>
-    myobj.addEventListener("onMyEvent", function(){});
-        */
+     myobj.onMyEvent = function(){}<br>
+     myobj.addEventListener("onMyEvent", function(){});
+     */
     baidu.lang.Class.prototype.dispatchEvent = function (event, options) {
         if (baidu.lang.isString(event)) {
             event = new baidu.lang.Event(event);
@@ -694,46 +694,46 @@
 
 
     /**
-    
+
      * 图片的路径
 
      * @private
      * @type {String}
-    
+
      */
     var _IMAGE_PATH = 'http://api.map.baidu.com/library/TextIconOverlay/1.2/src/images/m';
 
     /**
-    
+
      * 图片的后缀名
 
-      * @private
+     * @private
      * @type {String}
-    
+
      */
     var _IMAGE_EXTENSION  = 'png';
 
     /**
      *@exports TextIconOverlay as BMapLib.TextIconOverlay
      */
-    
+
     /**
-    * TextIconOverlay
-    * @class 此类表示地图上的一个覆盖物，该覆盖物由文字和图标组成，从Overlay继承。文字通常是数字（0-9）或字母（A-Z ），而文字与图标之间有一定的映射关系。
-    *该覆盖物适用于以下类似的场景：需要在地图上添加一系列覆盖物，这些覆盖物之间用不同的图标和文字来区分，文字可能表示了该覆盖物的某一属性值，根据该文字和一定的映射关系，自动匹配相应颜色和大小的图标。
-    *
-    *@constructor
-    *@param {Point} position 表示一个经纬度坐标位置。
-    *@param {String} text 表示该覆盖物显示的文字信息。
-    *@param {Json Object} options 可选参数，可选项包括：<br />
-    *"<b>styles</b>":{Array<IconStyle>} 一组图标风格。单个图表风格包括以下几个属性：<br />
-    *   url	{String}	 图片的url地址。(必选)<br />
-    *   size {Size}	图片的大小。（必选）<br />
-    *   anchor {Size} 图标定位在地图上的位置相对于图标左上角的偏移值，默认偏移值为图标的中心位置。（可选）<br />
-    *   offset {Size} 图片相对于可视区域的偏移值，此功能的作用等同于CSS中的background-position属性。（可选）<br />
-    *   textSize {Number} 文字的大小。（可选，默认10）<br />
-    *   textColor {String} 文字的颜色。（可选，默认black）<br />
-    */
+     * TextIconOverlay
+     * @class 此类表示地图上的一个覆盖物，该覆盖物由文字和图标组成，从Overlay继承。文字通常是数字（0-9）或字母（A-Z ），而文字与图标之间有一定的映射关系。
+     *该覆盖物适用于以下类似的场景：需要在地图上添加一系列覆盖物，这些覆盖物之间用不同的图标和文字来区分，文字可能表示了该覆盖物的某一属性值，根据该文字和一定的映射关系，自动匹配相应颜色和大小的图标。
+     *
+     *@constructor
+     *@param {Point} position 表示一个经纬度坐标位置。
+     *@param {String} text 表示该覆盖物显示的文字信息。
+     *@param {Json Object} options 可选参数，可选项包括：<br />
+     *"<b>styles</b>":{Array<IconStyle>} 一组图标风格。单个图表风格包括以下几个属性：<br />
+     *   url	{String}	 图片的url地址。(必选)<br />
+     *   size {Size}	图片的大小。（必选）<br />
+     *   anchor {Size} 图标定位在地图上的位置相对于图标左上角的偏移值，默认偏移值为图标的中心位置。（可选）<br />
+     *   offset {Size} 图片相对于可视区域的偏移值，此功能的作用等同于CSS中的background-position属性。（可选）<br />
+     *   textSize {Number} 文字的大小。（可选，默认10）<br />
+     *   textColor {String} 文字的颜色。（可选，默认black）<br />
+     */
     var TextIconOverlay = function(position, text, options){
         try {
             BMap;
@@ -745,11 +745,11 @@
         this._text = text;
         this._options = options || {};
         this._styles = this._options['styles'] || [];
-        (!this._styles.length) && this._setupDefaultStyles();                  
+        (!this._styles.length) && this._setupDefaultStyles();
     };
 
 
-    TextIconOverlay.prototype._setupDefaultStyles = function(){  
+    TextIconOverlay.prototype._setupDefaultStyles = function(){
         var sizes = [53, 56, 66, 78, 90];
         for(var i = 0, size; size = sizes[i]; i++){
             this._styles.push({
@@ -760,106 +760,206 @@
     };
 
     /**
-    *继承Overlay的intialize方法，自定义覆盖物时必须。
-    *@param {Map} map BMap.Map的实例化对象。
-    *@return {HTMLElement} 返回覆盖物对应的HTML元素。
-    */
+     *继承Overlay的intialize方法，自定义覆盖物时必须。
+     *@param {Map} map BMap.Map的实例化对象。
+     *@return {HTMLElement} 返回覆盖物对应的HTML元素。
+     */
     TextIconOverlay.prototype.initialize = function(map){
         this._map = map;
-    
-        this._domElement = document.createElement('div');     
-        this._updateCss();    
+
+        this._domElement = document.createElement('div');
+        this._updateCss();
         this._updateText();
-        this._updatePosition(); 
-        
+        this._updatePosition();
+
         this._bind();
 
         this._map.getPanes().markerMouseTarget.appendChild(this._domElement);
-        return this._domElement;   
+        return this._domElement;
     };
 
     /**
-    *继承Overlay的draw方法，自定义覆盖物时必须。
-    *@return 无返回值。
-    */
+     *继承Overlay的draw方法，自定义覆盖物时必须。
+     *@return 无返回值。
+     */
     TextIconOverlay.prototype.draw = function(){
         this._map && this._updatePosition();
     };
-    
+
     /**
-    *获取该覆盖物上的文字。
-    *@return {String} 该覆盖物上的文字。
-    */
+     *获取该覆盖物上的文字。
+     *@return {String} 该覆盖物上的文字。
+     */
     TextIconOverlay.prototype.getText = function(){
         return this._text;
     };
 
     /**
-    *设置该覆盖物上的文字。
-    *@param {String} text 要设置的文字，通常是字母A-Z或数字0-9。
-    *@return 无返回值。
-    */
-    TextIconOverlay.prototype.setText = function(text){
+     *设置该覆盖物上的文字。
+     *@param {String} text 要设置的文字，通常是字母A-Z或数字0-9。
+     *@return 无返回值。
+     */
+    TextIconOverlay.prototype.setText = function(text,styurl){
         if(text && (!this._text || (this._text.toString() != text.toString()))){
             this._text = text;
             this._updateText();
-            this._updateCss();
-            this._updatePosition(); 
-        }
-    };
-
-    /**
-    *获取该覆盖物的位置。
-    *@return {Point} 该覆盖物的经纬度坐标。
-    */
-    TextIconOverlay.prototype.getPosition = function () {
-        return this._position;
-    };
-   
-    /**
-    *设置该覆盖物的位置。
-    *@param {Point}  position 要设置的经纬度坐标。
-    *@return 无返回值。
-    */
-    TextIconOverlay.prototype.setPosition = function (position) {
-        if(position && (!this._position || !this._position.equals(position))){
-            this._position = position;  
+            this._updateCss(styurl);
             this._updatePosition();
         }
     };
 
     /**
-    *由文字信息获取风格数组的对应索引值。
-    *内部默认的对应函数为文字转换为数字除以10的结果，比如文字8返回索引0，文字25返回索引2.
-    *如果需要自定义映射关系，请覆盖该函数。
-    *@param {String} text  文字。
-    *@param {Array<IconStyle>}  styles 一组图标风格。
-    *@return {Number} 对应的索引值。
-    */
+     *获取该覆盖物的位置。
+     *@return {Point} 该覆盖物的经纬度坐标。
+     */
+    TextIconOverlay.prototype.getPosition = function () {
+        return this._position;
+    };
+
+    /**
+     *设置该覆盖物的位置。
+     *@param {Point}  position 要设置的经纬度坐标。
+     *@return 无返回值。
+     */
+    TextIconOverlay.prototype.setPosition = function (position) {
+        if(position && (!this._position || !this._position.equals(position))){
+            this._position = position;
+            this._updatePosition();
+        }
+    };
+
+    /**
+     *由文字信息获取风格数组的对应索引值。
+     *内部默认的对应函数为文字转换为数字除以10的结果，比如文字8返回索引0，文字25返回索引2.
+     *如果需要自定义映射关系，请覆盖该函数。
+     *@param {String} text  文字。
+     *@param {Array<IconStyle>}  styles 一组图标风格。
+     *@return {Number} 对应的索引值。
+     */
     TextIconOverlay.prototype.getStyleByText = function(text, styles){
+        //text 中包含 gn、rn、yn、hn
+        /*
         var count = parseInt(text);
         var index = parseInt(count / 10);
         index = Math.max(0, index);
         index = Math.min(index, styles.length - 1);
-        return styles[index]; 
-    }
+        return styles[index]; */
+        var sizes = [53, 56, 66, 78, 90];
+        var textobj = styurl;
+        if(styurl==null)
+        {
+            textobj = {gn:parseInt(text),rn:0,yn:0,hn:0}
+        }
 
+        var count = textobj.gn+textobj.rn+textobj.yn+textobj.hn;
+        var index = 0;
+        if(count>1000)
+        {
+            index = 4;
+        }
+        else if(count>500)
+        {
+            index = 3;
+        }
+        else if(count>250)
+        {
+            index = 2;
+        }
+        else if(count>125)
+        {
+            index = 1;
+        }
+        else
+        {
+            index = 0;
+        }
+        return {
+            url:drawProcess(textobj.gn,textobj.yn,textobj.rn,textobj.hn,'#31a45f','#eabd38','#e54537','#a0a6a2',sizes[index]),
+            size: new BMap.Size(sizes[index], sizes[index])
+        };
+    }
+    function drawProcess(gn,yn,rn,hn,gc,yc,rc,hc,size) {
+        // 选出页面上所有class为process的canvas元素,然后迭代每一个元素画图(这里用Jquery的选择器选的)
+        var canvas = document.createElement('canvas');
+        // 第一部先拿到canvas标签中间的文字,就是那个61%(这里的stringTrim方法是我自己的方法,去前后空格的方法很多的,这里就不贴出来了)
+        var gpre = gn/(gn+yn+rn+hn);
+        var ypre = yn/(gn+yn+rn+hn);
+        var rpre = rn/(gn+yn+rn+hn);
+        var hpre = hn/(gn+yn+rn+hn);
+        // 拿到绘图上下文,目前只支持"2d"
+        var context = canvas.getContext('2d');
+        // 将绘图区域清空,如果是第一次在这个画布上画图,画布上没有东西,这步就不需要了
+        //context.clearRect(0, 0, 48, 48);
+        //依次画绿色、红色、黄色、灰色
+        context.beginPath();
+        // 画扇形的时候这步很重要,画笔不在圆心画出来的不是扇形
+        context.moveTo(size/2, size/2);
+        // 跟上面的圆唯一的区别在这里,不画满圆,画个扇形
+        context.arc(size/2, size/2, size/2, 0, Math.PI * 2 * gpre , false);
+        context.closePath();
+        // 填充颜色
+        context.fillStyle = gc;
+        context.fill();
+
+        context.beginPath();
+        // 画扇形的时候这步很重要,画笔不在圆心画出来的不是扇形
+        context.moveTo(size/2, size/2);
+        // 跟上面的圆唯一的区别在这里,不画满圆,画个扇形
+        context.arc(size/2, size/2, size/2, Math.PI * 2 * gpre, Math.PI * 2 * (gpre+ypre), false);
+        context.closePath();
+        // 填充颜色
+        context.fillStyle = yc;
+        context.fill();
+
+        context.beginPath();
+        // 画扇形的时候这步很重要,画笔不在圆心画出来的不是扇形
+        context.moveTo(size/2, size/2);
+        // 跟上面的圆唯一的区别在这里,不画满圆,画个扇形
+        context.arc(size/2, size/2, size/2, Math.PI * 2 * (gpre+ypre), Math.PI * 2 * (gpre+ypre+rpre), false);
+        context.closePath();
+        // 填充颜色
+        context.fillStyle = rc;
+        context.fill();
+
+        context.beginPath();
+        // 画扇形的时候这步很重要,画笔不在圆心画出来的不是扇形
+        context.moveTo(size/2, size/2);
+        // 跟上面的圆唯一的区别在这里,不画满圆,画个扇形
+        context.arc(size/2, size/2, size/2, Math.PI * 2 * (gpre+ypre+rpre), Math.PI * 2, false);
+        context.closePath();
+        // 填充颜色
+        context.fillStyle = hc;
+        context.fill();
+
+        // ***开始画一个灰色的圆
+        context.beginPath();
+        // 坐标移动到圆心
+        context.moveTo(size/2, size/2);
+        // 画圆,圆心是24,24,半径24,从角度0开始,画到2PI结束,最后一个参数是方向顺时针还是逆时针
+        context.arc(size/2, size/2, size/2*16/27, 0, Math.PI * 2, false);
+        context.closePath();
+        // 填充颜色
+        context.fillStyle = '#fff';
+        context.fill();
+        // ***灰色的圆画完
+        return canvas.toDataURL("image/png");
+    }
     /**
-    *更新相应的CSS。
-    *@return 无返回值。
-    */
-    TextIconOverlay.prototype._updateCss = function(){
+     *更新相应的CSS。
+     *@return 无返回值。
+     */
+    TextIconOverlay.prototype._updateCss = function(styurl){
         if (!this._domElement) {
             return
         }
-        var style = this.getStyleByText(this._text, this._styles);
+        var style = this.getStyleByText(this._text, styurl);
         this._domElement.style.cssText = this._buildCssText(style);
     };
 
     /**
-    *更新覆盖物的显示文字。
-    *@return 无返回值。
-    */
+     *更新覆盖物的显示文字。
+     *@return 无返回值。
+     */
     TextIconOverlay.prototype._updateText = function(){
         if (this._domElement) {
             this._domElement.innerHTML = this._text;
@@ -867,26 +967,26 @@
     };
 
     /**
-    *调整覆盖物在地图上的位置更新覆盖物的显示文字。
-    *@return 无返回值。
-    */
+     *调整覆盖物在地图上的位置更新覆盖物的显示文字。
+     *@return 无返回值。
+     */
     TextIconOverlay.prototype._updatePosition = function(){
         if (this._domElement && this._position) {
             var style = this._domElement.style;
-            var pixelPosition= this._map.pointToOverlayPixel(this._position); 
+            var pixelPosition= this._map.pointToOverlayPixel(this._position);
             pixelPosition.x -= Math.ceil(parseInt(style.width) / 2);
-            pixelPosition.y -= Math.ceil(parseInt(style.height) / 2);       
+            pixelPosition.y -= Math.ceil(parseInt(style.height) / 2);
             style.left = pixelPosition.x + "px";
             style.top = pixelPosition.y + "px";
         }
     };
-    
+
     /**
-    * 为该覆盖物的HTML元素构建CSS
-    * @param {IconStyle}  一个图标的风格。
-    * @return {String} 构建完成的CSSTEXT。
-    */
-    TextIconOverlay.prototype._buildCssText = function(style) {    
+     * 为该覆盖物的HTML元素构建CSS
+     * @param {IconStyle}  一个图标的风格。
+     * @return {String} 构建完成的CSSTEXT。
+     */
+    TextIconOverlay.prototype._buildCssText = function(style) {
         //根据style来确定一些默认值
         var url = style['url'];
         var size = style['size'];
@@ -902,24 +1002,24 @@
         } else {
             csstext.push('background-image:url(' + url + ');');
             var backgroundPosition = '0 0';
-            (offset instanceof BMap.Size) && (backgroundPosition = offset.width + 'px' + ' ' + offset.height + 'px');          
+            (offset instanceof BMap.Size) && (backgroundPosition = offset.width + 'px' + ' ' + offset.height + 'px');
             csstext.push('background-position:' + backgroundPosition + ';');
         }
 
         if (size instanceof BMap.Size){
             if (anchor instanceof BMap.Size) {
                 if (anchor.height > 0 && anchor.height < size.height) {
-                      csstext.push('height:' + (size.height - anchor.height) + 'px; padding-top:' + anchor.height + 'px;');
+                    csstext.push('height:' + (size.height - anchor.height) + 'px; padding-top:' + anchor.height + 'px;');
                 }
                 if(anchor.width > 0 && anchor.width < size.width){
-                    csstext.push('width:' + (size.width - anchor.width) + 'px; padding-left:' + anchor.width + 'px;');                
+                    csstext.push('width:' + (size.width - anchor.width) + 'px; padding-left:' + anchor.width + 'px;');
                 }
             } else {
                 csstext.push('height:' + size.height + 'px; line-height:' + size.height + 'px;');
                 csstext.push('width:' + size.width + 'px; text-align:center;');
             }
         }
-   
+
         csstext.push('cursor:pointer; color:' + textColor + '; position:absolute; font-size:' +
             textSize + 'px; font-family:Arial,sans-serif; font-weight:bold');
         return csstext.join('');
@@ -927,7 +1027,7 @@
 
 
     /**
-    
+
      * 当鼠标点击该覆盖物时会触发该事件
 
      * @name TextIconOverlay#click
@@ -935,7 +1035,7 @@
      * @event
 
      * @param {Event Object} e 回调函数会返回event参数，包括以下返回值：
-    
+
      * <br />"<b>type</b> : {String} 事件类型
 
      * <br />"<b>target</b>：{BMapLib.TextIconOverlay} 事件目标
@@ -952,7 +1052,7 @@
 
      * @event
      * @param {Event Object} e 回调函数会返回event参数，包括以下返回值：
-    
+
      * <br />"<b>type</b> : {String} 事件类型
 
      * <br />"<b>target</b>：{BMapLib.TextIconOverlay} 事件目标
@@ -997,10 +1097,10 @@
 
 
     /**
-    * 为该覆盖物绑定一系列事件
-    * 当前支持click mouseover mouseout
-    * @return 无返回值。
-    */
+     * 为该覆盖物绑定一系列事件
+     * 当前支持click mouseover mouseout
+     * @return 无返回值。
+     */
     TextIconOverlay.prototype._bind = function(){
         if (!this._domElement){
             return;
